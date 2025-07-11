@@ -1436,7 +1436,7 @@ function sendToWhatsApp() {
         `${item.name} - Qtd: ${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}`
     ).join('\n')}\n\nTotal: R$ ${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}`;
     
-    const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/5545988127886?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 }
 
