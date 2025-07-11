@@ -320,7 +320,7 @@ function sendToWhatsApp() {
 
 // Open WhatsApp
 function openWhatsApp() {
-    const whatsappUrl = 'https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre os produtos.';
+    const whatsappUrl = 'https://wa.me/5545988127886?text=Olá! Gostaria de saber mais sobre os produtos.';
     window.open(whatsappUrl, '_blank');
 }
 

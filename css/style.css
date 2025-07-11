@@ -124,12 +124,12 @@ body {
     display: none;
     background: white;
     border-top: 1px solid #e5e7eb;
-    padding: 1rem 0;
+    padding: 1rem 20px;
 }
 
 .nav-mobile a {
     display: block;
-    padding: 0.75rem 0;
+    padding: 0.75rem 15px;
     text-decoration: none;
     color: #4b5563;
     font-weight: 500;
