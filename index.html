@@ -819,8 +819,9 @@ body {
         justify-content: center;
     }
     
-    .products-grid {
-        grid-template-columns: 1fr;
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em mobile */
+        gap: 1rem; /* Espaçamento menor */
     }
     
     .contact-grid {
@@ -838,6 +839,46 @@ body {
         width: 50px;
         height: 50px;
         font-size: 1.25rem;
+    }
+
+    .product-card {
+        margin: 0; /* Remover margens extras */
+    }
+    
+    .product-image {
+        height: 180px; /* Altura menor para a imagem */
+    }
+    
+    .product-info {
+        padding: 1rem; /* Padding menor */
+    }
+    
+    .product-name {
+        font-size: 1rem; /* Fonte menor para o nome */
+    }
+    
+    .product-description {
+        display: none; /* Ocultar descrição em mobile para economizar espaço */
+    }
+    
+    .current-price {
+        font-size: 1.2rem; /* Ajuste no tamanho do preço */
+    }
+    
+    .original-price {
+        font-size: 0.8rem; /* Fonte menor para o preço original */
+    }
+    
+    .add-to-cart {
+        padding: 0.5rem; /* Botão mais compacto */
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustes para telas muito pequenas */
+    .products-grid {
+        grid-template-columns: 1fr; /* 1 coluna em telas muito pequenas */
     }
 }
 
