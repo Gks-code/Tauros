@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELFBAR 600 - Morango | PODS Store</title>
+    <meta name="description"
+        content="ELFBAR 600 puffs com sabor morango intenso. Compre agora na PODS Store com entrega rápida.">
+    <meta name="keywords" content="elfbar, pods, cigarro eletrônico, vape, morango">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Reutilizando os estilos principais do seu site */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles (mesmo do site principal) */
+        .header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1e40af, #7c3aed);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-desktop a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-desktop a:hover {
+            color: #1e40af;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: #1e40af;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ef4444;
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+            min-width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Estilos específicos da página de produto */
+        .product-detail {
+            padding: 4rem 0;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            border-radius: 16px;
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            background: white;
+            padding: 0.5rem;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: #1e40af;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .product-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #fbbf24;
+        }
+
+        .review-count {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .availability {
+            font-weight: 500;
+            color: #059669;
+        }
+
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .current-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #059669;
+        }
+
+        .original-price {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            background: #ef4444;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            align-self: flex-start;
+        }
+
+        .product-description {
+            color: #6b7280;
+            line-height: 1.8;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #e5e7eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: #d1d5db;
+        }
+
+        .quantity {
+            width: 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .add-to-cart {
+            background: #1e40af;
+            color: white;
+            border: none;
+            padding: 0 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart:hover {
+            background: #1d4ed8;
+        }
+
+        .buy-now {
+            background: #059669;
+            color: white;
+            border: none;
+            padding: 0 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .buy-now:hover {
+            background: #047857;
+        }
+
+        .product-features {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-text {
+            font-size: 0.9rem;
+        }
+
+        .feature-text strong {
+            color: #1f2937;
+        }
+
+        /* WhatsApp Float Button (mesmo do site principal) */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-float:hover {
+            background: #128c7e;
+            transform: scale(1.1);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr;
+            }
+
+            .main-image {
+                height: 300px;
+            }
+
+            .product-title {
+                font-size: 1.8rem;
+            }
+
+            .current-price {
+                font-size: 1.5rem;
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .product-features {
+                grid-template-columns: 1fr;
+            }
+
+            .whatsapp-float {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header (igual ao site principal) -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <div class="logo-icon">P</div>
+                    <h1>PODS STORE</h1>
+                </div>
+
+                <nav class="nav-desktop">
+                    <a href="index.html">Início</a>
+                    <a href="index.html#produtos">Produtos</a>
+                    <a href="index.html#sobre">Sobre</a>
+                    <a href="index.html#contato">Contato</a>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="cart-btn" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Página de Produto -->
+    <section class="product-detail">
+        <div class="container">
+            <div class="product-container">
+                <div class="product-gallery">
+                    <img src="img/elfbar600.jpg" alt="ELFBAR 600 - Morango" class="main-image" id="mainImage">
+                    <div class="thumbnail-container">
+                        <img src="https://images.pexels.com/photos/5723834/pexels-photo-5723834.jpeg"
+                            alt="ELFBAR 600 - Morango" class="thumbnail active" onclick="changeImage(this)">
+                        <img src="https://images.pexels.com/photos/5723834/pexels-photo-5723834.jpeg"
+                            alt="ELFBAR 600 - Morango - Detalhe" class="thumbnail" onclick="changeImage(this)">
+                        <img src="https://images.pexels.com/photos/5723834/pexels-photo-5723834.jpeg"
+                            alt="ELFBAR 600 - Morango - Embalagem" class="thumbnail" onclick="changeImage(this)">
+                    </div>
+                </div>
+
+                <div class="product-info">
+                    <h1 class="product-title">ELFBAR 600 - Morango</h1>
+
+                    <div class="product-meta">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                        <span class="review-count">(124 avaliações)</span>
+                        <span class="availability">Disponível em estoque</span>
+                    </div>
+
+                    <div class="price-container">
+                        <span class="current-price">R$ 45,90</span>
+                        <span class="original-price">R$ 55,90</span>
+                        <span class="discount-badge">18% OFF</span>
+                    </div>
+
+                    <p class="product-description">
+                        O ELFBAR 600 com sabor Morango oferece uma experiência de vaping premium com 600 puffs de puro
+                        sabor.
+                        Seu design elegante e compacto é perfeito para quem busca praticidade sem abrir mão da
+                        qualidade.
+                        Com bateria integrada e sistema de ativação por inalação, é ideal para vapers iniciantes e
+                        experientes.
+                    </p>
+
+                    <div class="product-actions">
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="decreaseQuantity()">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="quantity" value="1" min="1" id="productQuantity">
+                            <button class="quantity-btn" onclick="increaseQuantity()">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <button class="add-to-cart" onclick="addToCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            Adicionar ao Carrinho
+                        </button>
+
+                        <button class="buy-now" onclick="buyNow()">
+                            <i class="fas fa-bolt"></i>
+                            Comprar Agora
+                        </button>
+                    </div>
+
+                    <div class="product-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                            <div class="feature-text">
+                                <strong>Bateria Integrada</strong><br>
+                                550mAh - Carregamento via USB-C
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="feature-text">
+                                <strong>E-líquido Premium</strong><br>
+                                2ml - 20mg/ml de nicotina
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-puff"></i>
+                            </div>
+                            <div class="feature-text">
+                                <strong>Puffs Aproximados</strong><br>
+                                Até 600 puffs por dispositivo
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <div class="feature-text">
+                                <strong>Pronto para Usar</strong><br>
+                                Não requer manutenção ou recargas
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button (igual ao site principal) -->
+    <button class="whatsapp-float" onclick="openWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+    </button>
+
+    <script>
+    // Array de produtos (simplificado para esta página)
+    const products = [{
+        id: 1,
+        name: "ELFBAR 600 - Morango",
+        price: 45.90,
+        originalPrice: 55.90,
+        image: "https://images.pexels.com/photos/5723834/pexels-photo-5723834.jpeg",
+        category: "ELFBAR",
+        rating: 4.8,
+        reviews: 124,
+        description: "ELFBAR 600 puffs com sabor morango intenso",
+        inStock: true
+    }];
+
+    // Variáveis globais
+    let currentQuantity = 1;
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Função para alternar o carrinho (redirecionar para carrinho.html)
+    function toggleCart() {
+        window.location.href = "carrinho.html";
+    }
+
+    // Funções do produto (mantenha as existentes)
+    function changeImage(element) {
+        const mainImage = document.getElementById('mainImage');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        
+        thumbnails.forEach(thumb => thumb.classList.remove('active'));
+        element.classList.add('active');
+        
+        mainImage.src = element.src;
+    }
+    
+    function increaseQuantity() {
+        currentQuantity++;
+        document.getElementById('productQuantity').value = currentQuantity;
+    }
+    
+    function decreaseQuantity() {
+        if (currentQuantity > 1) {
+            currentQuantity--;
+            document.getElementById('productQuantity').value = currentQuantity;
+        }
+    }
+
+    // Função para adicionar ao carrinho (atualizada)
+    function addToCart() {
+        const quantity = parseInt(document.getElementById('productQuantity').value);
+        const productId = 1; // ID do produto atual
+        
+        // Encontra o produto no array
+        const product = products.find(p => p.id === productId);
+        
+        if (!product) return;
+
+        // Verifica se o produto já está no carrinho
+        const existingItem = cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                quantity: quantity
+            });
+        }
+        
+        // Atualiza o localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Atualiza o contador do carrinho
+        updateCartCount();
+        
+        // Mostra notificação
+        showNotification(`Adicionado ${quantity} ${product.name} ao carrinho!`);
+    }
+
+    // Função para comprar agora (atualizada)
+    function buyNow() {
+        addToCart();
+        window.location.href = "carrinho.html";
+    }
+
+    // Atualizar contador do carrinho
+    function updateCartCount() {
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        const cartCount = document.getElementById('cartCount');
+        if (cartCount) {
+            cartCount.textContent = totalItems;
+            cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+    }
+
+    // Mostrar notificação (mantenha a existente)
+    function showNotification(message) {
+        // ... (código existente)
+    }
+
+    // WhatsApp (mantenha o existente)
+    function openWhatsApp() {
+        // ... (código existente)
+    }
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartCount();
+        
+        // Se estiver usando parâmetros na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        
+        // Aqui você pode carregar dados específicos do produto se necessário
+    });
+</script>
+
+</body>
+
+</html>

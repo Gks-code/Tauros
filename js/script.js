@@ -1,4 +1,4 @@
- // Products data
+// Products data
 const products = [
     {
         id: 1,
@@ -99,15 +99,15 @@ const products = [
 ];
 
 // Global variables
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || []
 let currentCategory = '';
 let searchTerm = '';
 
 // Initialize the application
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     renderProducts();
     updateCartCount();
-    
+
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -129,7 +129,7 @@ function renderProducts() {
     const filteredProducts = products.filter(product => {
         const matchesCategory = currentCategory === '' || product.category === currentCategory;
         const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            product.description.toLowerCase().includes(searchTerm.toLowerCase());
+            product.description.toLowerCase().includes(searchTerm.toLowerCase());
         return matchesCategory && matchesSearch;
     });
 
@@ -138,8 +138,10 @@ function renderProducts() {
         return;
     }
 
+    // No seu arquivo principal, na função renderProducts(), atualize o template do product-card:
     productsGrid.innerHTML = filteredProducts.map(product => `
-        <div class="product-card">
+    <div class="product-card">
+        <a href="produto-${product.id}.html" class="product-link">
             <div class="product-image">
                 <img src="${product.image}" alt="${product.name}" loading="lazy">
                 ${product.originalPrice ? `
@@ -161,39 +163,40 @@ function renderProducts() {
                 
                 <h3 class="product-name">${product.name}</h3>
                 <p class="product-description">${product.description}</p>
-                
-                <div class="product-footer">
-                    <div class="price-info">
-                        <span class="current-price">R$ ${product.price.toFixed(2)}</span>
-                        ${product.originalPrice ? `
-                            <span class="original-price">R$ ${product.originalPrice.toFixed(2)}</span>
-                        ` : ''}
-                    </div>
-                    
-                    <button 
-                        class="add-to-cart" 
-                        onclick="addToCart(${product.id})"
-                        ${!product.inStock ? 'disabled' : ''}
-                    >
-                        ${product.inStock ? 'Adicionar' : 'Esgotado'}
-                    </button>
-                </div>
             </div>
+        </a>
+        
+        <div class="product-footer">
+            <div class="price-info">
+                <span class="current-price">R$ ${product.price.toFixed(2)}</span>
+                ${product.originalPrice ? `
+                    <span class="original-price">R$ ${product.originalPrice.toFixed(2)}</span>
+                ` : ''}
+            </div>
+            
+            <button 
+                class="add-to-cart" 
+                onclick="addToCart(${product.id})"
+                ${!product.inStock ? 'disabled' : ''}
+            >
+                ${product.inStock ? 'Adicionar' : 'Esgotado'}
+            </button>
         </div>
-    `).join('');
+    </div>
+`).join('');
 }
 
 // Filter products by category
 function filterByCategory(category) {
     currentCategory = category;
-    
+
     // Update active filter button
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
     });
-    
+
     event.target.classList.add('active');
-    
+
     renderProducts();
     scrollToSection('produtos');
 }
@@ -210,13 +213,13 @@ function addToCart(productId) {
     if (!product || !product.inStock) return;
 
     const existingItem = cart.find(item => item.id === productId);
-    
+
     if (existingItem) {
         existingItem.quantity += 1;
     } else {
         cart.push({ ...product, quantity: 1 });
     }
-    
+
     updateCartCount();
     showNotification('Produto adicionado ao carrinho!');
 }
@@ -234,7 +237,7 @@ function updateQuantity(productId, newQuantity) {
         removeFromCart(productId);
         return;
     }
-    
+
     const item = cart.find(item => item.id === productId);
     if (item) {
         item.quantity = newQuantity;
@@ -255,7 +258,7 @@ function updateCartCount() {
 function toggleCart() {
     const modal = document.getElementById('cartModal');
     const isActive = modal.classList.contains('active');
-    
+
     if (isActive) {
         modal.classList.remove('active');
         document.body.style.overflow = '';
@@ -272,17 +275,17 @@ function renderCartItems() {
     const cartEmpty = document.getElementById('cartEmpty');
     const cartFooter = document.getElementById('cartFooter');
     const cartTotal = document.getElementById('cartTotal');
-    
+
     if (cart.length === 0) {
         cartItems.innerHTML = '';
         cartEmpty.style.display = 'block';
         cartFooter.style.display = 'none';
         return;
     }
-    
+
     cartEmpty.style.display = 'none';
     cartFooter.style.display = 'block';
-    
+
     cartItems.innerHTML = cart.map(item => `
         <div class="cart-item">
             <img src="${item.image}" alt="${item.name}">
@@ -301,7 +304,7 @@ function renderCartItems() {
             </div>
         </div>
     `).join('');
-    
+
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     cartTotal.textContent = total.toFixed(2);
 }
@@ -309,11 +312,11 @@ function renderCartItems() {
 // Send cart to WhatsApp
 function sendToWhatsApp() {
     if (cart.length === 0) return;
-    
-    const message = `Olá! Gostaria de fazer um pedido:\n\n${cart.map(item => 
+
+    const message = `Olá! Gostaria de fazer um pedido:\n\n${cart.map(item =>
         `${item.name} - Qtd: ${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}`
     ).join('\n')}\n\nTotal: R$ ${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}`;
-    
+
     const whatsappUrl = `https://wa.me/5545988127886?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 }
@@ -328,9 +331,9 @@ function openWhatsApp() {
 function toggleMobileMenu() {
     const mobileMenu = document.getElementById('mobileMenu');
     const menuIcon = document.getElementById('menuIcon');
-    
+
     mobileMenu.classList.toggle('active');
-    
+
     if (mobileMenu.classList.contains('active')) {
         menuIcon.className = 'fas fa-times';
     } else {
@@ -342,7 +345,7 @@ function toggleMobileMenu() {
 function closeMobileMenu() {
     const mobileMenu = document.getElementById('mobileMenu');
     const menuIcon = document.getElementById('menuIcon');
-    
+
     mobileMenu.classList.remove('active');
     menuIcon.className = 'fas fa-bars';
 }
@@ -377,14 +380,14 @@ function showNotification(message) {
         transition: transform 0.3s ease;
     `;
     notification.textContent = message;
-    
+
     document.body.appendChild(notification);
-    
+
     // Animate in
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
-    
+
     // Remove after 3 seconds
     setTimeout(() => {
         notification.style.transform = 'translateX(100%)';
@@ -395,7 +398,7 @@ function showNotification(message) {
 }
 
 // Close modal when clicking outside
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     const modal = document.getElementById('cartModal');
     if (event.target === modal) {
         toggleCart();
@@ -403,7 +406,7 @@ document.addEventListener('click', function(event) {
 });
 
 // Handle escape key to close modal
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
         const modal = document.getElementById('cartModal');
         if (modal.classList.contains('active')) {
@@ -413,12 +416,12 @@ document.addEventListener('keydown', function(event) {
 });
 
 // Smooth scroll behavior for all internal links
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     if (event.target.matches('a[href^="#"]')) {
         event.preventDefault();
         const targetId = event.target.getAttribute('href').substring(1);
         const targetElement = document.getElementById(targetId);
-        
+
         if (targetElement) {
             targetElement.scrollIntoView({
                 behavior: 'smooth',
@@ -429,15 +432,36 @@ document.addEventListener('click', function(event) {
 });
 
 // Add loading animation for images
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const images = document.querySelectorAll('img[loading="lazy"]');
-    
+
     images.forEach(img => {
-        img.addEventListener('load', function() {
+        img.addEventListener('load', function () {
             this.style.opacity = '1';
         });
-        
+
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.3s ease';
     });
 });
+
+
+// Quando adicionar itens ao carrinho: 
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+    
+    // Salve no localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    updateCartCount();
+    showNotification('Produto adicionado ao carrinho!');
+}

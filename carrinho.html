@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras | PODS Store</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1e40af, #7c3aed);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .cart-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cart-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 1rem;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            align-items: center;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #f9fafb;
+            padding: 0.5rem;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            color: #059669;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #e5e7eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: #d1d5db;
+        }
+
+        .quantity {
+            width: 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-continue {
+            background: #e5e7eb;
+            color: #4b5563;
+            border: none;
+        }
+
+        .btn-continue:hover {
+            background: #d1d5db;
+        }
+
+        .btn-checkout {
+            background: #059669;
+            color: white;
+            border: none;
+        }
+
+        .btn-checkout:hover {
+            background: #047857;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .whatsapp-float:hover {
+            background: #128c7e;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .quantity-controls {
+                justify-content: center;
+            }
+
+            .cart-actions {
+                flex-direction: column;
+            }
+
+            .whatsapp-float {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <div class="logo-icon">P</div>
+                    <h1>PODS STORE</h1>
+                </div>
+                <a href="index.html" class="btn btn-continue">
+                    <i class="fas fa-arrow-left"></i> Continuar Comprando
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="cart-container">
+            <h2><i class="fas fa-shopping-cart"></i> Seu Carrinho</h2>
+            <div id="cartItems">
+                <!-- Itens serão carregados aqui pelo JavaScript -->
+            </div>
+
+            <div id="cartEmpty" class="cart-empty">
+                <p>Seu carrinho está vazio</p>
+                <a href="index.html" class="btn btn-continue">
+                    <i class="fas fa-store"></i> Ver Produtos
+                </a>
+            </div>
+
+            <div id="cartFooter" style="display: none;">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span>R$ <span id="cartTotal">0.00</span></span>
+                </div>
+
+                <div class="cart-actions">
+                    <a href="index.html" class="btn btn-continue">
+                        <i class="fas fa-arrow-left"></i> Continuar Comprando
+                    </a>
+                    <button class="btn btn-checkout" onclick="checkout()">
+                        <i class="fab fa-whatsapp"></i> Finalizar pelo WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Botão do WhatsApp -->
+    <button class="whatsapp-float" onclick="openWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+    </button>
+
+    <script>
+        // 1. Carrega o carrinho do localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // 2. Função para SALVAR o carrinho atualizado
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Debug: Mostra o conteúdo atual do localStorage
+            console.log('Carrinho salvo:', JSON.parse(localStorage.getItem('cart')));
+        }
+
+        // 3. Atualiza a exibição do carrinho
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartEmpty = document.getElementById('cartEmpty');
+            const cartFooter = document.getElementById('cartFooter');
+            const cartTotal = document.getElementById('cartTotal');
+
+            // Se carrinho vazio
+            if (cart.length === 0) {
+                cartItems.innerHTML = '';
+                cartEmpty.style.display = 'block';
+                cartFooter.style.display = 'none';
+
+                // LIMPA o localStorage quando o carrinho está vazio
+                localStorage.removeItem('cart');
+                return;
+            }
+
+            // Se tem itens
+            cartEmpty.style.display = 'none';
+            cartFooter.style.display = 'block';
+
+            // Renderiza os itens
+            cartItems.innerHTML = cart.map(item => `
+            <div class="cart-item" data-id="${item.id}">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="cart-item-info">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-price">R$ ${item.price.toFixed(2)}</div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="quantity">${item.quantity}</span>
+                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="remove-item" onclick="removeItem(${item.id})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `).join('');
+
+            // Calcula o total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = total.toFixed(2);
+
+            // SALVA as alterações
+            saveCart();
+        }
+
+        // 4. Remove item do carrinho (CORRIGIDO)
+        function removeItem(productId) {
+            if (confirm('Tem certeza que deseja remover este item?')) {
+                // Filtra o array removendo o item
+                cart = cart.filter(item => item.id !== productId);
+
+                // Atualiza a exibição E o localStorage
+                updateCartDisplay();
+
+                // Mostra feedback
+                showNotification('Item removido do carrinho!');
+            }
+        }
+
+        // 5. Atualiza quantidade (CORRIGIDO)
+        function updateQuantity(productId, newQuantity) {
+            if (newQuantity < 1) {
+                removeItem(productId);
+                return;
+            }
+
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            if (itemIndex !== -1) {
+                cart[itemIndex].quantity = newQuantity;
+
+                // Atualiza a exibição E o localStorage
+                updateCartDisplay();
+            }
+        }
+
+        // 6. Mostra notificação
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // 7. Inicialização
+        document.addEventListener('DOMContentLoaded', function () {
+            // Debug: Verifica o que está no localStorage
+            console.log('Carrinho carregado:', JSON.parse(localStorage.getItem('cart')));
+
+            updateCartDisplay();
+        });
+    </script>
+</body>
+
+</html>

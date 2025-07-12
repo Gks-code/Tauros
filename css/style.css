@@ -879,3 +879,22 @@ body {
         max-width: 400px;
     }
 }
+
+.product-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.product-card {
+    position: relative;
+}
+
+.product-footer {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.add-to-cart {
+    z-index: 2;
+    position: relative;
+}
