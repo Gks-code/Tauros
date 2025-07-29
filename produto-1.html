@@ -9,8 +9,63 @@
         content="ELFBAR 600 puffs com sabor morango intenso. Compre agora na PODS Store com entrega rápida.">
     <meta name="keywords" content="elfbar, pods, cigarro eletrônico, vape, morango">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Reutilizando os estilos principais do seu site */
+        /* ===== VARIÁVEIS & RESET ===== */
+        :root {
+            /* Cores Vibrantes */
+            --primary: #FF3D00;
+            /* Laranja elétrico */
+            --primary-hover: #E53935;
+            /* Vermelho vibrante */
+            --secondary: #8E24AA;
+            /* Roxo intenso */
+            --accent: #00E5FF;
+            /* Azul neon */
+            --success: #00C853;
+            /* Verde fluorescente */
+            --danger: #FF1744;
+            /* Rosa neon */
+            --warning: #FFC400;
+            /* Amarelo brilhante */
+            --text: #212121;
+            /* Preto para contraste */
+            --text-light: #757575;
+            --bg-dark: #1A1A1A;
+            /* Fundo escuro */
+            --bg-light: #FAFAFA;
+            /* Fundo claro */
+            --card-bg: #FFFFFF;
+            /* Branco puro */
+
+            /* Efeitos Neon */
+            --neon-glow: 0 0 10px rgba(255, 61, 0, 0.7),
+                0 0 20px rgba(255, 61, 0, 0.5),
+                0 0 30px rgba(255, 61, 0, 0.3);
+
+            /* Espaçamentos */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+
+            /* Bordas */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+
+            /* Sombras */
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.3);
+
+            /* Gradientes */
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-accent: linear-gradient(135deg, var(--secondary), var(--accent));
+            --gradient-neon: linear-gradient(135deg, #FF3D00, #FF1744, #8E24AA, #00E5FF);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,359 +73,507 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Rajdhani', 'Segoe UI', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f8fafc;
+            color: var(--text);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
         }
 
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 var(--space-md);
         }
 
-        /* Header Styles (mesmo do site principal) */
+        /* ===== HEADER NEON ===== */
         .header {
-            background: white;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            background: var(--bg-dark);
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(255, 61, 0, 0.3);
         }
 
         .nav-wrapper {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem 0;
+            padding: var(--space-md) 0;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: var(--space-sm);
+            text-decoration: none;
         }
 
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #1e40af, #7c3aed);
-            border-radius: 8px;
+            background: linear-gradient(270deg, #ff6b6b, #f8e71c, #4facfe, #00f2fe);
+            background-size: 600% 600%;
+            animation: gradientMove 8s ease infinite;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .logo h1 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1f2937;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 61, 0, 0.7);
         }
 
         .nav-desktop {
             display: flex;
-            gap: 2rem;
+            gap: var(--space-xl);
         }
 
         .nav-desktop a {
             text-decoration: none;
-            color: #4b5563;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            position: relative;
+            padding: var(--space-sm) 0;
+        }
+
+        .nav-desktop a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
         .nav-desktop a:hover {
-            color: #1e40af;
+            color: var(--accent);
+        }
+
+        .nav-desktop a:hover::after {
+            width: 100%;
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: var(--space-md);
         }
 
         .cart-btn {
             position: relative;
-            background: #1e40af;
+            background: linear-gradient(270deg, #ff6b6b, #f8e71c, #4facfe, #00f2fe);
+            background-size: 600% 600%;
+            animation: gradientMove 8s ease infinite;
             color: white;
-            border: none;
-            padding: 0.75rem;
-            border-radius: 8px;
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 0 10px rgba(255, 61, 0, 0.5);
         }
 
         .cart-btn:hover {
-            background: #1d4ed8;
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(255, 61, 0, 0.7);
         }
 
         .cart-count {
             position: absolute;
             top: -8px;
             right: -8px;
-            background: #ef4444;
-            color: white;
-            font-size: 0.75rem;
-            padding: 2px 6px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            font-size: 0.8rem;
+            padding: var(--space-xs) var(--space-sm);
             border-radius: 50%;
-            min-width: 20px;
-            height: 20px;
+            min-width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 700;
+            box-shadow: 0 0 8px rgba(0, 229, 255, 0.7);
         }
 
-        /* Estilos específicos da página de produto */
+        /* ===== PÁGINA DE PRODUTO ===== */
         .product-detail {
-            padding: 4rem 0;
+            padding: var(--space-xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-detail::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,61,0,0.03)" d="M0,0 L100,0 L100,100 L0,100 Z"></path></svg>');
+            background-size: cover;
+            z-index: 0;
         }
 
         .product-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: var(--space-xl);
+            position: relative;
+            z-index: 1;
         }
 
         .product-gallery {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: var(--space-md);
         }
 
         .main-image {
             width: 100%;
             height: 400px;
             object-fit: contain;
-            border-radius: 16px;
-            background: white;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-lg);
+            background: var(--card-bg);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .main-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
         .thumbnail-container {
             display: flex;
-            gap: 1rem;
+            gap: var(--space-md);
         }
 
         .thumbnail {
             width: 80px;
             height: 80px;
             object-fit: contain;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             border: 2px solid transparent;
             transition: all 0.3s ease;
-            background: white;
-            padding: 0.5rem;
+            background: var(--card-bg);
+            padding: var(--space-sm);
+            box-shadow: var(--shadow-sm);
         }
 
         .thumbnail:hover,
         .thumbnail.active {
-            border-color: #1e40af;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(255, 61, 0, 0.3);
+            transform: translateY(-3px);
         }
 
         .product-info {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: var(--space-lg);
         }
 
         .product-title {
             font-size: 2.5rem;
             font-weight: bold;
-            color: #1f2937;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .product-meta {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: var(--space-md);
+            flex-wrap: wrap;
         }
 
         .rating {
             display: flex;
             align-items: center;
-            gap: 0.25rem;
-            color: #fbbf24;
+            gap: var(--space-xs);
+            color: var(--warning);
         }
 
         .review-count {
-            color: #6b7280;
+            color: var(--text-light);
             font-size: 0.9rem;
         }
 
         .availability {
-            font-weight: 500;
-            color: #059669;
+            font-weight: 700;
+            color: var(--success);
+            background: rgba(0, 200, 83, 0.1);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
         }
 
         .price-container {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: var(--space-sm);
         }
 
         .current-price {
             font-size: 2rem;
             font-weight: bold;
-            color: #059669;
+            color: var(--primary);
         }
 
         .original-price {
             font-size: 1.25rem;
-            color: #9ca3af;
+            color: var(--text-light);
             text-decoration: line-through;
         }
 
         .discount-badge {
-            background: #ef4444;
+            background: var(--danger);
             color: white;
-            padding: 0.25rem 0.75rem;
+            padding: var(--space-xs) var(--space-md);
             border-radius: 20px;
             font-size: 0.875rem;
-            font-weight: 600;
+            font-weight: 700;
             align-self: flex-start;
+            box-shadow: 0 2px 10px rgba(255, 23, 68, 0.5);
         }
 
         .product-description {
-            color: #6b7280;
+            color: var(--text-light);
             line-height: 1.8;
+            font-size: 1.1rem;
         }
 
         .product-actions {
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+            flex-wrap: wrap;
         }
 
         .quantity-control {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            padding: 0.5rem;
+            gap: var(--space-sm);
+            border: 2px solid var(--primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-sm);
+            background: var(--card-bg);
         }
 
         .quantity-btn {
             width: 32px;
             height: 32px;
             border: none;
-            background: #e5e7eb;
+            background: var(--primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            color: white;
+            font-weight: bold;
         }
 
         .quantity-btn:hover {
-            background: #d1d5db;
+            background: var(--primary-hover);
+            transform: scale(1.1);
         }
 
         .quantity {
             width: 40px;
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            background: transparent;
         }
 
         .add-to-cart {
-            background: #1e40af;
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 0 2rem;
-            border-radius: 8px;
-            font-weight: 600;
+            padding: 0 var(--space-xl);
+            border-radius: var(--radius-md);
+            font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: var(--space-sm);
+            height: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 61, 0, 0.3);
         }
 
         .add-to-cart:hover {
-            background: #1d4ed8;
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 61, 0, 0.5);
         }
 
         .buy-now {
-            background: #059669;
+            background: var(--success);
             color: white;
             border: none;
-            padding: 0 2rem;
-            border-radius: 8px;
-            font-weight: 600;
+            padding: 0 var(--space-xl);
+            border-radius: var(--radius-md);
+            font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: var(--space-sm);
+            height: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.3);
         }
 
         .buy-now:hover {
-            background: #047857;
+            background: #00b247;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
         }
 
         .product-features {
-            margin-top: 2rem;
+            margin-top: var(--space-xl);
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+            gap: var(--space-lg);
         }
 
         .feature-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: var(--space-md);
+            background: var(--card-bg);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
         }
 
         .feature-icon {
-            width: 40px;
-            height: 40px;
-            background: #dbeafe;
-            color: #1e40af;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(255, 61, 0, 0.3);
         }
 
         .feature-text {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .feature-text strong {
-            color: #1f2937;
+            color: var(--text);
+            font-weight: 700;
+            display: block;
+            margin-bottom: var(--space-xs);
         }
 
-        /* WhatsApp Float Button (mesmo do site principal) */
+        /* ===== WHATSAPP BUTTON ===== */
         .whatsapp-float {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
+            bottom: var(--space-xl);
+            right: var(--space-xl);
+            width: 70px;
+            height: 70px;
             background: #25d366;
             color: white;
-            border: none;
             border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5);
             z-index: 1000;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            animation: pulseWhatsApp 2s infinite;
+        }
+
+        @keyframes pulseWhatsApp {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
         }
 
         .whatsapp-float:hover {
             background: #128c7e;
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(10deg);
         }
 
-        /* Responsividade */
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 992px) {
+            .product-title {
+                font-size: 2rem;
+            }
+
+            .current-price {
+                font-size: 1.8rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .product-container {
                 grid-template-columns: 1fr;
@@ -392,16 +595,94 @@
                 flex-direction: column;
             }
 
+            .add-to-cart,
+            .buy-now {
+                width: 100%;
+                justify-content: center;
+            }
+
             .product-features {
                 grid-template-columns: 1fr;
             }
 
             .whatsapp-float {
-                bottom: 1rem;
-                right: 1rem;
+                bottom: var(--space-lg);
+                right: var(--space-lg);
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-title {
+                font-size: 1.6rem;
+            }
+
+            .whatsapp-float {
+                bottom: var(--space-md);
+                right: var(--space-md);
                 width: 50px;
                 height: 50px;
-                font-size: 1.25rem;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Botão do menu hamburguer */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Menu Mobile (escondido por padrão) */
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            gap: var(--space-md);
+            background: var(--bg-dark);
+            padding: var(--space-md);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .nav-mobile a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-mobile a:last-child {
+            border-bottom: none;
+        }
+
+        /* Mostrar apenas no mobile */
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-mobile {
+                display: none;
+                /* continua escondido, será mostrado via JS */
+            }
+
+            .nav-mobile.active {
+                display: flex;
             }
         }
     </style>
@@ -417,7 +698,20 @@
                     <h1>PODS STORE</h1>
                 </div>
 
+                <!-- Botão do menu mobile -->
+                <button class="menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+
                 <nav class="nav-desktop">
+                    <a href="index.html">Início</a>
+                    <a href="index.html#produtos">Produtos</a>
+                    <a href="index.html#sobre">Sobre</a>
+                    <a href="index.html#contato">Contato</a>
+                </nav>
+
+                <!-- Menu Mobile (inicialmente escondido) -->
+                <nav class="nav-mobile" id="mobileMenu">
                     <a href="index.html">Início</a>
                     <a href="index.html#produtos">Produtos</a>
                     <a href="index.html#sobre">Sobre</a>
@@ -551,124 +845,130 @@
     </button>
 
     <script>
-    // Array de produtos (simplificado para esta página)
-    const products = [{
-        id: 1,
-        name: "ELFBAR 600 - Morango",
-        price: 45.90,
-        originalPrice: 55.90,
-        image: "https://images.pexels.com/photos/5723834/pexels-photo-5723834.jpeg",
-        category: "ELFBAR",
-        rating: 4.8,
-        reviews: 124,
-        description: "ELFBAR 600 puffs com sabor morango intenso",
-        inStock: true
-    }];
+        // Array de produtos (simplificado para esta página)
+        const products = [{
+            id: 1,
+            name: "ELFBAR 600 - Morango",
+            price: 45.90,
+            originalPrice: 55.90,
+            image: "https://images.pexels.com/photos/5723834/pexels-photo-5723834.jpeg",
+            category: "ELFBAR",
+            rating: 4.8,
+            reviews: 124,
+            description: "ELFBAR 600 puffs com sabor morango intenso",
+            inStock: true
+        }];
 
-    // Variáveis globais
-    let currentQuantity = 1;
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Variáveis globais
+        let currentQuantity = 1;
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    // Função para alternar o carrinho (redirecionar para carrinho.html)
-    function toggleCart() {
-        window.location.href = "carrinho.html";
-    }
+        // Função para alternar o carrinho (redirecionar para carrinho.html)
+        function toggleCart() {
+            window.location.href = "carrinho.html";
+        }
 
-    // Funções do produto (mantenha as existentes)
-    function changeImage(element) {
-        const mainImage = document.getElementById('mainImage');
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        
-        thumbnails.forEach(thumb => thumb.classList.remove('active'));
-        element.classList.add('active');
-        
-        mainImage.src = element.src;
-    }
-    
-    function increaseQuantity() {
-        currentQuantity++;
-        document.getElementById('productQuantity').value = currentQuantity;
-    }
-    
-    function decreaseQuantity() {
-        if (currentQuantity > 1) {
-            currentQuantity--;
+        // Funções do produto (mantenha as existentes)
+        function changeImage(element) {
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            element.classList.add('active');
+
+            mainImage.src = element.src;
+        }
+
+        function increaseQuantity() {
+            currentQuantity++;
             document.getElementById('productQuantity').value = currentQuantity;
         }
-    }
 
-    // Função para adicionar ao carrinho (atualizada)
-    function addToCart() {
-        const quantity = parseInt(document.getElementById('productQuantity').value);
-        const productId = 1; // ID do produto atual
-        
-        // Encontra o produto no array
-        const product = products.find(p => p.id === productId);
-        
-        if (!product) return;
-
-        // Verifica se o produto já está no carrinho
-        const existingItem = cart.find(item => item.id === productId);
-        
-        if (existingItem) {
-            existingItem.quantity += quantity;
-        } else {
-            cart.push({
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                image: product.image,
-                quantity: quantity
-            });
+        function decreaseQuantity() {
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                document.getElementById('productQuantity').value = currentQuantity;
+            }
         }
-        
-        // Atualiza o localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Atualiza o contador do carrinho
-        updateCartCount();
-        
-        // Mostra notificação
-        showNotification(`Adicionado ${quantity} ${product.name} ao carrinho!`);
-    }
 
-    // Função para comprar agora (atualizada)
-    function buyNow() {
-        addToCart();
-        window.location.href = "carrinho.html";
-    }
+        // Função para adicionar ao carrinho (atualizada)
+        function addToCart() {
+            const quantity = parseInt(document.getElementById('productQuantity').value);
+            const productId = 1; // ID do produto atual
 
-    // Atualizar contador do carrinho
-    function updateCartCount() {
-        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-        const cartCount = document.getElementById('cartCount');
-        if (cartCount) {
-            cartCount.textContent = totalItems;
-            cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+            // Encontra o produto no array
+            const product = products.find(p => p.id === productId);
+
+            if (!product) return;
+
+            // Verifica se o produto já está no carrinho
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: quantity
+                });
+            }
+
+            // Atualiza o localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Atualiza o contador do carrinho
+            updateCartCount();
+
+            // Mostra notificação
+            showNotification(`Adicionado ${quantity} ${product.name} ao carrinho!`);
         }
-    }
 
-    // Mostrar notificação (mantenha a existente)
-    function showNotification(message) {
-        // ... (código existente)
-    }
+        // Função para comprar agora (atualizada)
+        function buyNow() {
+            addToCart();
+            window.location.href = "carrinho.html";
+        }
 
-    // WhatsApp (mantenha o existente)
-    function openWhatsApp() {
-        // ... (código existente)
-    }
+        // Atualizar contador do carrinho
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+                cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+        }
 
-    // Inicialização
-    document.addEventListener('DOMContentLoaded', function() {
-        updateCartCount();
-        
-        // Se estiver usando parâmetros na URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const productId = urlParams.get('id');
-        
-        // Aqui você pode carregar dados específicos do produto se necessário
-    });
-</script>
+        // Mostrar notificação (mantenha a existente)
+        function showNotification(message) {
+            // ... (código existente)
+        }
+
+        // WhatsApp (mantenha o existente)
+        function openWhatsApp() {
+            // ... (código existente)
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function () {
+            updateCartCount();
+
+            // Se estiver usando parâmetros na URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            // Aqui você pode carregar dados específicos do produto se necessário
+        });
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+    </script>
 
 </body>
 
